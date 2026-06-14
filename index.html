@@ -2376,6 +2376,345 @@
       }
     }
 
+
+    /* FINAL FIX: show the day list inside the mobile Menu drawer */
+    @media (max-width: 820px) {
+      .sidebar {
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      .sidebar .days-title-mobile-hide {
+        display: flex !important;
+        margin-top: 12px !important;
+      }
+
+      .sidebar .day-list {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        margin-bottom: 16px !important;
+      }
+
+      .sidebar .day-btn {
+        display: grid !important;
+        grid-template-columns: 40px minmax(0, 1fr) auto !important;
+        min-height: 58px !important;
+        padding: 9px 10px 12px !important;
+        border-radius: 17px !important;
+      }
+
+      .sidebar .day-number {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 14px !important;
+        font-size: 15px !important;
+      }
+
+      .sidebar .day-info small,
+      .sidebar .day-info em {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      .sidebar .side-actions {
+        margin-top: 10px !important;
+      }
+
+      .sidebar .side-actions button {
+        min-height: 44px !important;
+      }
+
+      .sidebar .legend {
+        margin-bottom: calc(20px + env(safe-area-inset-bottom)) !important;
+      }
+    }
+
+
+    /* FINAL MOBILE DAY PICKER: native select overlay, works reliably on iPhone/Android */
+    @media (max-width: 820px) {
+      .native-day-picker {
+        display: block !important;
+        position: relative !important;
+        top: auto !important;
+        z-index: 75 !important;
+        margin: 10px 0 14px !important;
+      }
+
+      .native-day-picker .mobile-day-current {
+        position: relative !important;
+        width: 100% !important;
+        min-height: 66px !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 42px !important;
+        gap: 2px 12px !important;
+        align-items: center !important;
+        text-align: left !important;
+        padding: 13px 14px !important;
+        border-radius: 24px !important;
+        border: 1px solid rgba(54,209,220,.42) !important;
+        color: var(--text) !important;
+        background:
+          linear-gradient(135deg, rgba(54,209,220,.20), rgba(255,154,139,.10)),
+          rgba(8,17,32,.90) !important;
+        backdrop-filter: blur(22px) !important;
+        box-shadow: 0 18px 46px rgba(0,0,0,.28) !important;
+        cursor: pointer !important;
+      }
+
+      .native-day-picker .mobile-day-current span,
+      .native-day-picker .mobile-day-current strong,
+      .native-day-picker .mobile-day-current em {
+        min-width: 0 !important;
+        grid-column: 1 !important;
+      }
+
+      .native-day-picker .mobile-day-current span {
+        display: block !important;
+        color: var(--cyan) !important;
+        font-size: 12px !important;
+        font-weight: 900 !important;
+        text-transform: uppercase !important;
+        letter-spacing: .11em !important;
+      }
+
+      .native-day-picker .mobile-day-current strong {
+        display: block !important;
+        max-width: 100% !important;
+        color: var(--text) !important;
+        font-size: 17px !important;
+        line-height: 1.18 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      .native-day-picker .mobile-day-current em {
+        display: block !important;
+        color: var(--muted) !important;
+        font-size: 12px !important;
+        font-style: normal !important;
+      }
+
+      .native-day-picker .mobile-day-current b {
+        grid-column: 2 !important;
+        grid-row: 1 / span 3 !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 16px !important;
+        display: grid !important;
+        place-items: center !important;
+        color: #06101e !important;
+        background: linear-gradient(135deg, var(--cyan), #b8f7ff) !important;
+        font-size: 20px !important;
+        pointer-events: none !important;
+      }
+
+      .mobile-day-native-select {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0.01 !important;
+        border: 0 !important;
+        cursor: pointer !important;
+        z-index: 2 !important;
+        appearance: auto !important;
+        -webkit-appearance: menulist-button !important;
+        font-size: 18px !important;
+        color: transparent !important;
+        background: transparent !important;
+      }
+
+      .mobile-day-menu,
+      .mobile-day-sheet {
+        display: none !important;
+      }
+    }
+
+
+    /* REAL MOBILE DAY DROPDOWN - visible under the card */
+    .custom-day-picker {
+      display: none;
+    }
+
+    @media (max-width: 820px) {
+      .custom-day-picker {
+        display: block !important;
+        position: relative !important;
+        z-index: 200 !important;
+        margin: 10px 0 14px !important;
+      }
+
+      .custom-day-picker .mobile-day-current {
+        width: 100% !important;
+        min-height: 66px !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 48px !important;
+        gap: 2px 12px !important;
+        align-items: center !important;
+        text-align: left !important;
+        padding: 13px 14px !important;
+        border-radius: 24px !important;
+        border: 1px solid rgba(54,209,220,.48) !important;
+        color: var(--text) !important;
+        background:
+          linear-gradient(135deg, rgba(54,209,220,.20), rgba(255,154,139,.10)),
+          rgba(8,17,32,.92) !important;
+        backdrop-filter: blur(22px) !important;
+        box-shadow: 0 18px 46px rgba(0,0,0,.28) !important;
+        cursor: pointer !important;
+      }
+
+      .custom-day-picker .mobile-day-current span,
+      .custom-day-picker .mobile-day-current strong,
+      .custom-day-picker .mobile-day-current em {
+        min-width: 0 !important;
+        grid-column: 1 !important;
+        pointer-events: none !important;
+      }
+
+      .custom-day-picker .mobile-day-current span {
+        color: var(--cyan) !important;
+        font-size: 12px !important;
+        font-weight: 900 !important;
+        text-transform: uppercase !important;
+        letter-spacing: .12em !important;
+      }
+
+      .custom-day-picker .mobile-day-current strong {
+        display: block !important;
+        max-width: 100% !important;
+        color: var(--text) !important;
+        font-size: 17px !important;
+        line-height: 1.18 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      .custom-day-picker .mobile-day-current em {
+        display: block !important;
+        color: var(--muted) !important;
+        font-size: 12px !important;
+        font-style: normal !important;
+      }
+
+      .custom-day-picker .mobile-day-current b {
+        grid-column: 2 !important;
+        grid-row: 1 / span 3 !important;
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 18px !important;
+        display: grid !important;
+        place-items: center !important;
+        color: #06101e !important;
+        background: linear-gradient(135deg, var(--cyan), #b8f7ff) !important;
+        font-size: 22px !important;
+        pointer-events: none !important;
+        transition: transform 180ms ease !important;
+      }
+
+      .custom-day-picker.open .mobile-day-current b {
+        transform: rotate(180deg) !important;
+      }
+
+      .mobile-day-dropdown {
+        display: none !important;
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: calc(100% + 8px) !important;
+        z-index: 999 !important;
+        max-height: 56vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior: contain !important;
+        touch-action: pan-y !important;
+        padding: 8px !important;
+        border-radius: 22px !important;
+        border: 1px solid rgba(255,255,255,.16) !important;
+        background: rgba(8,17,32,.98) !important;
+        backdrop-filter: blur(24px) !important;
+        box-shadow: 0 24px 80px rgba(0,0,0,.48) !important;
+      }
+
+      .custom-day-picker.open .mobile-day-dropdown {
+        display: grid !important;
+        gap: 8px !important;
+      }
+
+      .mobile-day-choice {
+        width: 100% !important;
+        min-height: 58px !important;
+        display: grid !important;
+        grid-template-columns: 40px minmax(0, 1fr) !important;
+        grid-template-rows: auto auto !important;
+        gap: 2px 10px !important;
+        align-items: center !important;
+        padding: 10px !important;
+        border-radius: 17px !important;
+        border: 1px solid rgba(255,255,255,.10) !important;
+        color: var(--text) !important;
+        background: rgba(255,255,255,.06) !important;
+        text-align: left !important;
+        cursor: pointer !important;
+      }
+
+      .mobile-day-choice.active {
+        border-color: rgba(54,209,220,.55) !important;
+        background: linear-gradient(135deg, rgba(54,209,220,.22), rgba(255,154,139,.10)) !important;
+      }
+
+      .mobile-day-choice span {
+        grid-row: 1 / span 2 !important;
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 15px !important;
+        display: grid !important;
+        place-items: center !important;
+        color: #06101e !important;
+        background: linear-gradient(135deg, var(--cyan), #b8f7ff) !important;
+        font-weight: 900 !important;
+        font-size: 15px !important;
+      }
+
+      .mobile-day-choice.active span {
+        background: linear-gradient(135deg, var(--pink), var(--yellow)) !important;
+      }
+
+      .mobile-day-choice strong {
+        display: block !important;
+        min-width: 0 !important;
+        color: var(--text) !important;
+        font-size: 14px !important;
+        line-height: 1.12 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      .mobile-day-choice em {
+        display: block !important;
+        min-width: 0 !important;
+        color: var(--muted) !important;
+        font-size: 11.5px !important;
+        line-height: 1.2 !important;
+        font-style: normal !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      .mobile-day-native-select,
+      .mobile-day-menu,
+      .mobile-day-sheet {
+        display: none !important;
+      }
+    }
+
     @media print {
       body {
         background: white;
@@ -2429,20 +2768,9 @@
         <div class="brand-mark">✈️</div>
         <div>
           <h1>Ninh Linh Planner</h1>
-          <p>7 ngày · Có thêm/sửa/xóa lịch trình</p>
+          <p>Chọn ngày ngay trong menu điện thoại</p>
         </div>
-      </div>
-      <div class="side-actions">
-        <button class="primary-btn" onclick="openActivityModal('add')">＋ Thêm hoạt động</button>
-        <button class="ghost-btn" onclick="openDayModal()">✎ Sửa thông tin ngày</button>
-        <button class="ghost-btn" onclick="exportJSON()">⬇ Xuất dữ liệu JSON</button>
-        <button class="ghost-btn" onclick="document.getElementById('importFile').click()">⬆ Nhập dữ liệu JSON</button>
-        <input id="importFile" type="file" accept="application/json,.json" style="display:none" />
-        <button class="ghost-btn" onclick="openReserveView()">🧭 Kho dự bị</button>
-        <button class="ghost-btn" onclick="window.print()">🖨️ In / lưu PDF</button>
-      </div>
-
-      <div class="nav-title days-title-mobile-hide">
+      </div>      <div class="nav-title days-title-mobile-hide">
         <span>7 ngày</span>
         <span id="doneCount">0 done</span>
       </div>
@@ -2476,13 +2804,37 @@
         <div class="chips" id="filters"></div>
       </section>
 
-      <section class="mobile-day-picker">
-        <button class="mobile-day-current" type="button" onclick="openMobileDaySheet()">
-          <span id="mobileDayCurrentText">Ngày 1</span>
-          <strong id="mobileDayCurrentTitle">Lịch trình</strong>
+      <section class="mobile-day-picker custom-day-picker" id="mobileDayPicker">
+        <button class="mobile-day-current" type="button" onclick="toggleDayDropdown(event)">
+          <span id="mobileDayCurrentText">NGÀY 1</span>
+          <strong id="mobileDayCurrentTitle">Bay Hà Nội → Đà Nẵng</strong>
           <em>Bấm để chọn ngày</em>
-          <b>⌄</b>
+          <b id="mobileDayArrow">⌄</b>
         </button>
+
+        <div class="mobile-day-dropdown" id="mobileDayDropdown">
+          <button type="button" class="mobile-day-choice" onclick="chooseMobileDay(1)">
+            <span>1</span><strong>Ngày 1</strong><em>Bay Hà Nội → Đà Nẵng</em>
+          </button>
+          <button type="button" class="mobile-day-choice" onclick="chooseMobileDay(2)">
+            <span>2</span><strong>Ngày 2</strong><em>Sơn Trà · Chùa Linh Ứng · Mỹ Khê</em>
+          </button>
+          <button type="button" class="mobile-day-choice" onclick="chooseMobileDay(3)">
+            <span>3</span><strong>Ngày 3</strong><em>Bà Nà Hills · Sông Hàn</em>
+          </button>
+          <button type="button" class="mobile-day-choice" onclick="chooseMobileDay(4)">
+            <span>4</span><strong>Ngày 4</strong><em>Hội An · Đèn hoa đăng</em>
+          </button>
+          <button type="button" class="mobile-day-choice" onclick="chooseMobileDay(5)">
+            <span>5</span><strong>Ngày 5</strong><em>Đà Nẵng → Huế</em>
+          </button>
+          <button type="button" class="mobile-day-choice" onclick="chooseMobileDay(6)">
+            <span>6</span><strong>Ngày 6</strong><em>Đại Nội · Làng Hương</em>
+          </button>
+          <button type="button" class="mobile-day-choice" onclick="chooseMobileDay(7)">
+            <span>7</span><strong>Ngày 7</strong><em>Cafe muối · Bay về</em>
+          </button>
+        </div>
       </section>
 
       <section class="overview">
@@ -3589,7 +3941,9 @@ function renderAll() {
   renderReservePanel();
   applySearchAndFilter();
   updateMobileNav?.();
-  renderMobileDayMenu();
+  renderMobileDayMenu?.();
+  renderMobileDaySelect?.();
+  updateCustomDayPicker?.();
 }
 
 function selectDay(dayNum) {
@@ -4215,6 +4569,7 @@ document.addEventListener("keydown", function(event) {
     closeDayModal();
     closeReserveModal();
     closeMobileDaySheet();
+    closeDayDropdown?.();
     closeImageLightbox();
   }
 });
@@ -4261,7 +4616,9 @@ selectDay = function(dayNum) {
   closeSidebar();
   closeMobileDayMenu?.();
   updateMobileNav();
-  renderMobileDayMenu();
+  renderMobileDayMenu?.();
+  renderMobileDaySelect?.();
+  updateCustomDayPicker?.();
 };
 
 const originalOpenReserveView = openReserveView;
@@ -4270,7 +4627,9 @@ openReserveView = function() {
   closeSidebar();
   closeMobileDayMenu?.();
   updateMobileNav();
-  renderMobileDayMenu();
+  renderMobileDayMenu?.();
+  renderMobileDaySelect?.();
+  updateCustomDayPicker?.();
 };
 
 const originalCloseReserveView = closeReserveView;
@@ -4278,7 +4637,9 @@ closeReserveView = function() {
   originalCloseReserveView();
   closeMobileDayMenu?.();
   updateMobileNav();
-  renderMobileDayMenu();
+  renderMobileDayMenu?.();
+  renderMobileDaySelect?.();
+  updateCustomDayPicker?.();
 };
 
 
@@ -4350,13 +4711,100 @@ function renderMobileDayMenu() {
   renderMobileDaySheetList();
 }
 
+
+function renderMobileDaySelect() {
+  const select = document.getElementById("mobileDaySelect");
+  const currentText = document.getElementById("mobileDayCurrentText");
+  const currentTitle = document.getElementById("mobileDayCurrentTitle");
+  if (!select || !currentText || !currentTitle || !Array.isArray(data) || !data.length) return;
+
+  select.innerHTML = data.map(day => {
+    const title = `Ngày ${Number(day.day)} - ${(day.title || "").replace(/"/g, "&quot;")}`;
+    return `<option value="${Number(day.day)}">${title}</option>`;
+  }).join("");
+
+  select.value = String(activeDay);
+
+  const active = data.find(day => Number(day.day) === Number(activeDay)) || data[0];
+  if (viewingReserve) {
+    currentText.textContent = "Kho dự bị";
+    currentTitle.textContent = "Địa điểm · quán ăn · hoạt động dự bị";
+  } else {
+    currentText.textContent = `Ngày ${Number(active.day)}`;
+    currentTitle.textContent = active.title || `Ngày ${Number(active.day)}`;
+  }
+}
+
+function selectMobileDayFromSelect(value) {
+  const dayNum = Number(value);
+  if (!Number.isFinite(dayNum)) return;
+  selectDay(dayNum);
+  setTimeout(renderMobileDaySelect, 0);
+}
+
+
+function updateCustomDayPicker() {
+  const text = document.getElementById("mobileDayCurrentText");
+  const title = document.getElementById("mobileDayCurrentTitle");
+  const dropdown = document.getElementById("mobileDayDropdown");
+  if (!text || !title || !dropdown || !Array.isArray(data) || !data.length) return;
+
+  const active = data.find(day => Number(day.day) === Number(activeDay)) || data[0];
+
+  if (viewingReserve) {
+    text.textContent = "KHO DỰ BỊ";
+    title.textContent = "Địa điểm · quán ăn · hoạt động dự bị";
+  } else {
+    text.textContent = `NGÀY ${Number(active.day)}`;
+    title.textContent = active.title || `Ngày ${Number(active.day)}`;
+  }
+
+  dropdown.innerHTML = data.map(day => {
+    const isActive = !viewingReserve && Number(day.day) === Number(activeDay);
+    return `
+      <button type="button" class="mobile-day-choice ${isActive ? "active" : ""}" onclick="chooseMobileDay(${Number(day.day)})">
+        <span>${Number(day.day)}</span>
+        <strong>Ngày ${Number(day.day)}</strong>
+        <em>${esc(day.title || "")}</em>
+      </button>
+    `;
+  }).join("");
+}
+
+function toggleDayDropdown(event) {
+  if (event) event.stopPropagation();
+  updateCustomDayPicker();
+  const picker = document.getElementById("mobileDayPicker");
+  if (!picker) return;
+  picker.classList.toggle("open");
+}
+
+function closeDayDropdown() {
+  const picker = document.getElementById("mobileDayPicker");
+  if (picker) picker.classList.remove("open");
+}
+
+function chooseMobileDay(dayNum) {
+  closeDayDropdown();
+  selectDay(Number(dayNum));
+  setTimeout(updateCustomDayPicker, 0);
+}
+
+document.addEventListener("click", function(event) {
+  const picker = document.getElementById("mobileDayPicker");
+  if (!picker) return;
+  if (!picker.contains(event.target)) closeDayDropdown();
+});
+
 document.getElementById("importFile").addEventListener("change", function() {
   importJSONFile(this.files[0]);
   this.value = "";
 });
 
 renderAll();
-renderMobileDayMenu();
+renderMobileDayMenu?.();
+renderMobileDaySelect?.();
+updateCustomDayPicker?.();
 </script>
 </body>
 </html>
