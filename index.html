@@ -2092,6 +2092,55 @@
       }
     }
 
+
+    /* Mobile day dropdown - fixed and scrollable fix */
+    @media (max-width: 820px) {
+      .mobile-day-picker {
+        display: block !important;
+        position: relative !important;
+        top: auto !important;
+        z-index: 80 !important;
+        margin: 10px 0 14px !important;
+      }
+
+      .mobile-day-current {
+        width: 100% !important;
+        position: relative !important;
+      }
+
+      .mobile-day-menu {
+        display: none !important;
+        position: relative !important;
+        z-index: 100 !important;
+        margin-top: 8px !important;
+        max-height: 62vh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        overscroll-behavior: contain !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
+      }
+
+      .mobile-day-picker.open .mobile-day-menu {
+        display: grid !important;
+        gap: 8px !important;
+      }
+
+      .mobile-day-option {
+        display: grid !important;
+        width: 100% !important;
+        flex-shrink: 0 !important;
+      }
+
+      .sidebar .day-list {
+        display: none !important;
+      }
+
+      .sidebar .nav-title.days-title-mobile-hide {
+        display: none !important;
+      }
+    }
+
     @media print {
       body {
         background: white;
@@ -2158,7 +2207,7 @@
         <button class="ghost-btn" onclick="window.print()">🖨️ In / lưu PDF</button>
       </div>
 
-      <div class="nav-title">
+      <div class="nav-title days-title-mobile-hide">
         <span>7 ngày</span>
         <span id="doneCount">0 done</span>
       </div>
@@ -3965,24 +4014,25 @@ function renderMobileDayMenu() {
   const menu = document.getElementById("mobileDayMenu");
   const currentText = document.getElementById("mobileDayCurrentText");
   const currentTitle = document.getElementById("mobileDayCurrentTitle");
-  if (!menu || !currentText || !currentTitle) return;
+  if (!menu || !currentText || !currentTitle || !Array.isArray(data)) return;
 
-  const active = data.find(day => day.day === activeDay) || data[0];
+  const active = data.find(day => Number(day.day) === Number(activeDay)) || data[0];
   currentText.textContent = viewingReserve ? "Kho dự bị" : `Ngày ${active.day}`;
   currentTitle.textContent = viewingReserve ? "Địa điểm · quán ăn · hoạt động dự bị" : active.title;
 
   menu.innerHTML = data.map(day => {
     const done = dayDoneCount(day);
-    const first = day.items[0]?.start || "--:--";
-    const last = day.items[day.items.length - 1]?.start || "--:--";
+    const first = day.items?.[0]?.start || "--:--";
+    const last = day.items?.[day.items.length - 1]?.start || "--:--";
+    const isActive = !viewingReserve && Number(day.day) === Number(activeDay);
     return `
-      <button class="mobile-day-option ${!viewingReserve && day.day === activeDay ? "active" : ""}" onclick="selectMobileDay(${day.day})">
+      <button type="button" class="mobile-day-option ${isActive ? "active" : ""}" onclick="selectMobileDay(${day.day})">
         <span class="num">${day.day}</span>
         <span>
-          <strong>Ngày ${day.day}: ${esc(day.title)}</strong>
-          <small>${esc(day.city)} · ${esc(first)} → ${esc(last)}</small>
+          <strong>Ngày ${day.day}: ${esc(day.title || "")}</strong>
+          <small>${esc(day.city || "")} · ${esc(first)} → ${esc(last)}</small>
         </span>
-        <span class="count">${done}/${day.items.length}</span>
+        <span class="count">${done}/${day.items?.length || 0}</span>
       </button>
     `;
   }).join("");
@@ -3991,6 +4041,7 @@ function renderMobileDayMenu() {
 function toggleMobileDayMenu() {
   const picker = document.querySelector(".mobile-day-picker");
   if (!picker) return;
+  renderMobileDayMenu();
   picker.classList.toggle("open");
 }
 
@@ -4016,6 +4067,7 @@ document.getElementById("importFile").addEventListener("change", function() {
 });
 
 renderAll();
+renderMobileDayMenu();
 </script>
 </body>
 </html>
